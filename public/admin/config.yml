@@ -1,7 +1,9 @@
+
 backend:
   name: github
   repo: nitinyadav0319/greensolor-website
   branch: main
+
   # For local testing, use: name: test-repo
 
 # Uncomment below to enable drafts
