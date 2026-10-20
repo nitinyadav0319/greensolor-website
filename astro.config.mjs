@@ -14,7 +14,7 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://greensolor-website.netlify.app',
+  site: 'https://loquacious-genie-16444d.netlify.app',
   base: '/',
 });
 
