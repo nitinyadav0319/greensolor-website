@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: amrpyt/solar-panel-website-demo
+  repo: nitinyadav0319/greensolor-website
   branch: main
   # For local testing, use: name: test-repo
 
