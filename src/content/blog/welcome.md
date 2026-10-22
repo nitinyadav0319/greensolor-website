@@ -1,9 +1,13 @@
 ---
-title: "Welcome to SolarPower Co. Blog"
-description: "Learn about solar energy, sustainability, and how we're making a difference"
-author: "SolarPower Team"
-date: 2024-01-15
-tags: ["solar", "renewable energy", "sustainability"]
+title: Welcome to SolarPower Co. Blog
+description: Learn about solar energy, sustainability, and how we're making a difference
+author: Green India Team
+date: 2026-10-22T00:00:00.000+05:30
+image: /images/uploads/chatgpt-image-aug-20-2026-04_20_03-pm.png
+tags:
+  - solar
+  - renewable energy
+  - sustainability
 ---
 
 Welcome to the SolarPower Co. blog! Here you'll find the latest news, tips, and insights about solar energy and sustainable living.
