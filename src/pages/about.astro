@@ -7,8 +7,15 @@ import Button from '../components/Button.astro';
 import Shield from '../components/icons/Shield.astro';
 import Award from '../components/icons/Award.astro';
 import LeafEnergy from '../components/icons/LeafEnergy.astro';
+import { getEntry } from 'astro:content';
+import { siteSettings } from '../lib/site-settings';
 
 const base = import.meta.env.BASE_URL;
+const aboutPage = await getEntry('pages', 'about');
+const aboutData = aboutPage?.data;
+const aboutTitle = aboutData?.title || 'About Us';
+const aboutDescription = aboutData?.description || siteSettings.siteDescription;
+const { Content: AboutContent } = aboutPage ? await aboutPage.render() : { Content: null };
 
 const values = [
   {
@@ -65,14 +72,15 @@ const stats = [
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
-  name: 'About SolarPower Co.',
-  description: 'Learn about our mission, values, and commitment to providing sustainable solar energy solutions.',
+  name: aboutTitle,
+  description: aboutDescription,
+  publisher: { '@type': 'Organization', name: siteSettings.companyName },
 };
 ---
 
 <BaseLayout
-  title="About Us"
-  description="Learn about SolarPower Co., our mission to provide sustainable solar energy solutions, and our commitment to excellence in renewable energy."
+  title={aboutTitle}
+  description={aboutDescription}
 >
   <JsonLd schema={schema} />
 
@@ -81,11 +89,10 @@ const schema = {
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto text-center">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-fade-in-up">
-          Powering a Sustainable Future
+          {aboutTitle}
         </h1>
         <p class="text-xl text-gray-600 mb-8 animate-fade-in-up" style="animation-delay: 0.1s">
-          Since 2009, we've been helping homes and businesses transition to clean, renewable solar energy.
-          Our mission is to make sustainable energy accessible, affordable, and reliable for everyone.
+          {aboutDescription}
         </p>
       </div>
     </div>
@@ -112,21 +119,7 @@ const schema = {
         <div class="animate-on-scroll">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
           <div class="space-y-4 text-gray-600">
-            <p>
-              Founded in 2009 by a team of renewable energy enthusiasts, SolarPower Co. began with a simple vision: 
-              to make solar energy accessible to everyone. What started as a small local operation has grown into 
-              one of the region's most trusted solar installation companies.
-            </p>
-            <p>
-              Over the years, we've installed over 5,000 solar systems, helping families and businesses reduce their 
-              carbon footprint while saving money on energy costs. Our commitment to quality, innovation, and customer 
-              satisfaction has earned us numerous industry awards and, more importantly, the trust of our community.
-            </p>
-            <p>
-              Today, we continue to push the boundaries of solar technology, offering cutting-edge solutions that 
-              combine efficiency, durability, and sustainability. Every project we undertake brings us closer to 
-              our goal of a cleaner, greener future for all.
-            </p>
+            {AboutContent ? <div class="prose prose-lg text-gray-600"><AboutContent /></div> : <p>{aboutDescription}</p>}
           </div>
         </div>
         <div class="animate-on-scroll">

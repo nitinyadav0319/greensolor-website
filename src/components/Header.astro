@@ -1,5 +1,6 @@
 ---
 import Logo from './icons/Logo.astro';
+import { siteSettings } from '../lib/site-settings';
 
 const currentPath = Astro.url.pathname;
 const base = import.meta.env.BASE_URL;
@@ -17,8 +18,8 @@ const navItems = [
   <nav class="container mx-auto px-4 py-4">
     <div class="flex items-center justify-between">
       <!-- Logo -->
-      <a href={base} class="flex items-center hover:opacity-80 transition-opacity">
-        <Logo class="h-12 w-auto" />
+      <a href={base} class="flex items-center hover:opacity-80 transition-opacity" aria-label={`${siteSettings.companyName} home`}>
+        <Logo name={siteSettings.companyName} class="h-12 w-auto" />
       </a>
 
       <!-- Desktop Navigation -->

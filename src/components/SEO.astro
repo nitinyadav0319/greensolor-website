@@ -1,4 +1,6 @@
 ---
+import { absoluteSiteUrl, siteSettings } from '../lib/site-settings';
+
 export interface Props {
   title: string;
   description: string;
@@ -11,14 +13,15 @@ export interface Props {
 const {
   title,
   description,
-  canonical = Astro.url.href,
-  image = '/og-image.jpg',
+  canonical = absoluteSiteUrl(Astro.url.pathname),
+  image,
   type = 'website',
   noindex = false,
 } = Astro.props;
 
-const siteName = 'SolarPower Co.';
+const siteName = siteSettings.siteTitle || siteSettings.companyName;
 const fullTitle = `${title} | ${siteName}`;
+const socialImage = image ? (image.startsWith('http') ? image : absoluteSiteUrl(image)) : undefined;
 ---
 
 <!-- Primary Meta Tags -->
@@ -34,7 +37,7 @@ const fullTitle = `${title} | ${siteName}`;
 <meta property="og:url" content={canonical} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={image} />
+{socialImage && <meta property="og:image" content={socialImage} />}
 <meta property="og:site_name" content={siteName} />
 
 <!-- Twitter -->
@@ -42,7 +45,7 @@ const fullTitle = `${title} | ${siteName}`;
 <meta name="twitter:url" content={canonical} />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={image} />
+{socialImage && <meta name="twitter:image" content={socialImage} />}
 
 <!-- Additional SEO -->
 <meta name="theme-color" content="#f59e0b" />

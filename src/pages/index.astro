@@ -6,37 +6,49 @@ import Services from '../components/sections/Services.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import Projects from '../components/sections/Projects.astro';
 import CTA from '../components/sections/CTA.astro';
+import { siteSettings } from '../lib/site-settings';
+import { getEntry } from 'astro:content';
 
+const homePage = await getEntry('pages', 'home');
+const homeData = homePage?.data;
+const homeTitle = homeData?.heroTitle || 'Power Your Future with Clean Energy';
+const homeSubtitle = homeData?.heroSubtitle || siteSettings.siteDescription;
+const homeCta = homeData?.heroCTA || 'Get Free Quote';
+const { Content: HomeContent } = homePage ? await homePage.render() : { Content: null };
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'SolarPower Co.',
-  description: 'Leading provider of solar energy solutions for homes and businesses',
-  url: 'https://solarpowerco.com',
-  logo: 'https://solarpowerco.com/logo.png',
+  name: siteSettings.companyName,
+  description: siteSettings.siteDescription,
+  url: siteSettings.siteUrl,
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+1-555-123-4567',
+    telephone: siteSettings.phone,
+    email: siteSettings.email,
     contactType: 'Customer Service',
   },
+  sameAs: Object.values(siteSettings.social).filter(Boolean),
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '123 Solar Street',
-    addressLocality: 'Green City',
-    addressRegion: 'GC',
-    postalCode: '12345',
-    addressCountry: 'US',
+    streetAddress: siteSettings.address,
   },
 };
 ---
 
 <BaseLayout
-  title="Home"
-  description="Transform your home or business with cutting-edge solar technology. Save money, reduce your carbon footprint, and invest in a sustainable future with SolarPower Co."
+  title={homeData?.title || 'Home'}
+  description={homeSubtitle}
 >
   <JsonLd schema={schema} />
   
-  <Hero />
+  <Hero title={homeTitle} subtitle={homeSubtitle} ctaText={homeCta} />
+  {HomeContent && (
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4 max-w-4xl prose prose-lg text-gray-600">
+        <HomeContent />
+      </div>
+    </section>
+  )}
   <Services />
   <Projects />
   <Testimonials />

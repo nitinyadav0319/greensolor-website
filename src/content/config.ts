@@ -49,9 +49,24 @@ const services = defineCollection({
   }),
 });
 
+const pages = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string().optional(),
+    heroTitle: z.string().optional(),
+    heroSubtitle: z.string().optional(),
+    heroCTA: z.string().optional(),
+    description: z.string().optional(),
+    email: z.string().optional(),
+    phone: z.string().optional(),
+    address: z.string().optional(),
+  }),
+});
+
 export const collections = {
   blog,
   projects,
   testimonials,
   services,
+  pages,
 };
