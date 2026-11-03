@@ -1,5 +1,5 @@
 ---
-title: Welcome to SolarPower Co. Blog
+title: "Welcome to Green india "
 description: Learn about solar energy, sustainability, and how we're making a difference
 author: Green India Team
 date: 2026-10-22T00:00:00.000+05:30
