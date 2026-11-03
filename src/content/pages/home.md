@@ -1,6 +1,6 @@
 ---
 title: Home
-heroTitle: Power Your Future with Green Lights India
+heroTitle: Power Your Future with Green Lights  India
 heroSubtitle: Discover sustainable energy solutions with Green Lights India.
   From solar power supply to biogas system design and wind energy solutions, we
   help you build a cleaner, greener future.
